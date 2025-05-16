@@ -1,0 +1,8 @@
+Django==4.2 #Framework
+django-cors-headers==4.2.0 # Habilita el soporte para Cross-Origin Resource Sharing (CORS) en aplicaciones Django.
+django-environ==0.10.0 # Simplifica la gestión de la configuración mediante variables de entorno.
+djangorestframework==3.14.0 #Apis rest
+requests==2.31.0 # Solicitudes HTTP
+psycopg2==2.9.9
+djangorestframework-simplejwt==5.3.1
+faker==19.6.2
