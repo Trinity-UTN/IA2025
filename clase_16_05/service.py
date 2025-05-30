@@ -27,3 +27,43 @@ class ServiceIA:
             "sentimiento": cls.LABELS.get(resultado["label"], "Desconocido"),
             "confianza": round(resultado["score"], 4)
         }
+    
+    @classmethod
+    def generar_dataset(cls):
+        """Generar Dataset
+        El mismo genera un dataset etiquetado a partir de una lista de reseñas.
+        El data set tiene el siguiente formato:
+
+        reseña, sentimiento
+
+        Args:
+            reseñas (_type_): _description_
+        Returns:
+            _type_: _description_
+        """
+        
+        #Ruta al archivo con las reseñas generadas con inteligencia artificial
+        entrada='C:/Users/Usuario/OneDrive/Paginas Web/ClaseIA/IA2025/clase_16_05/reseñas_sistemas.txt'
+        
+        #Nombre del data set de salida
+        salida="dataset.txt"
+
+        resultados = []
+
+        #Obtenemos las reseñas del archivo antes mencionado
+        with open(entrada, "r", encoding="utf-8") as f:
+            reseñas = [line.strip().strip('"') for line in f if line.strip()]
+
+        # Analizamos las reseñas con la funcion analizar_sentimiento
+        # En la misma nos genera un diccionario con la reseña y el sentimiento
+        for i, reseña in enumerate(reseñas):
+            resultado = ServiceIA.analizar_sentimiento(reseña, nombre=f"Reseña {i+1}")
+            resultados.append((reseña, resultado["sentimiento"]))
+
+        # Guardar el dataset como CSV-like (con comillas)
+        with open(salida, "w", encoding="utf-8") as f:
+            for reseña, sentimiento in resultados:
+                reseña_limpia = reseña.replace('"', '""')  # Escapamos comillas
+                f.write(f'"{reseña_limpia}","{sentimiento}"\n')
+
+        return None

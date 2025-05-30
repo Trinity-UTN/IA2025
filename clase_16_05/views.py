@@ -14,4 +14,7 @@ class ChatBotViewSet(viewsets.ViewSet):
             None
         )
     
+    def create(self, request):
+        return BaseResponse.response(ServiceIA.procesar_reseñas_y_guardar_dataset(), 200, "created", None)
+    
     
