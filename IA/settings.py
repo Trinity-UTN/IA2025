@@ -1,33 +1,18 @@
-import environ
+
 import os
-from pathlib import Path
-from datetime import timedelta
-
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent
-
-env = environ.Env()
-env.read_env(os.path.join(BASE_DIR, '.env'))
-
-SECRET_KEY = env('SECRET_KEY')
 
 
-DEBUG = env.bool("DEBUG", default=False)
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-def get_list_from_env(var_name, default=""):
-    return env.list(var_name, default=default.split(","))
+SECRET_KEY = "django-insecure-ad+&c++l&&&jhm+26e6)uw_+ll0($nn8x03i*@g%9*6sm0@+!y"
 
-DEBUG = env.bool("DEBUG", default=False)
+DEBUG = True
 
-ALLOWED_HOSTS = ["*"] if DEBUG else get_list_from_env("ALLOWED_HOSTS")
 
-CSRF_TRUSTED_ORIGINS = (
-    ["http://*", "https://*"] if DEBUG else get_list_from_env("CSRF_TRUSTED_ORIGINS")
-)
+ALLOWED_HOSTS = ["http://127.0.0.1","http://localhost"]
 
-"""CORS_ALLOWED_ORIGINS = (
-    ["http://*", "https://*"] if DEBUG else get_list_from_env("CORS_ALLOWED_ORIGINS")
-)"""
+CSRF_TRUSTED_ORIGINS = ["http://127.0.0.1","http://localhost"]
+
 
 CORS_ALLOW_CREDENTIALS = True
 CORS_ALLOW_ALL_ORIGINS = True
@@ -83,7 +68,7 @@ WSGI_APPLICATION = 'IA.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
 

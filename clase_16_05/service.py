@@ -8,6 +8,18 @@ sentiment_analyzer = pipeline(
 )
 
 class ServiceIA:
+    """ Service IA
+
+    El mismo contiene la logica para poder analizar una reseña y retornar el sentimiento encontrado
+    Functions:
+        analizar_sentimiento: 
+            - args: str reseña, str nombre
+            - return: dict
+
+        generar_dataset:
+            - args: None
+            - return: None
+    """
     LABELS = {
         "POS": "Positivo",
         "NEG": "Negativo",
@@ -16,6 +28,21 @@ class ServiceIA:
 
     @classmethod
     def analizar_sentimiento(cls, reseña: str, nombre: str) -> dict:
+        """Analizar sentimiento
+        Funcion que utiliza la inteligencia artificial para analizar el sentimiento de una reseña
+        Args:
+            reseña (str): Reseña de algo
+            nombre (str): Nombre de la reseña
+
+        Returns:
+            dict: {
+                "nombre": str,
+                "reseña": str,
+                "sentimiento": str,
+                "confianza": float
+            }
+        """
+
         if not reseña or not nombre:
             return {"error": "Se requieren 'nombre' y 'reseña'"}
 
@@ -42,7 +69,6 @@ class ServiceIA:
             _type_: _description_
         """
         
-        #Ruta al archivo con las reseñas generadas con inteligencia artificial
         entrada='C:/Users/Usuario/OneDrive/Paginas Web/ClaseIA/IA2025/clase_16_05/reseñas_sistemas.txt'
         
         #Nombre del data set de salida
